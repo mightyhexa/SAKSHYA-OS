@@ -1,0 +1,119 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "System persona or user profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "officerId": { "type": "string" },
+        "role": { "type": "string" },
+        "station": { "type": "string" },
+        "jurisdiction": { "type": "string" },
+        "avatar": { "type": "string" },
+        "badgeNumber": { "type": "string" }
+      },
+      "required": ["id", "name", "role", "officerId"]
+    },
+    "Case": {
+      "title": "Case",
+      "description": "Criminal or legal investigation case record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "caseNumber": { "type": "string" },
+        "title": { "type": "string" },
+        "policeStation": { "type": "string" },
+        "investigatingOfficer": { "type": "string" },
+        "ioId": { "type": "string" },
+        "section": { "type": "string" },
+        "status": { "type": "string" },
+        "stage": { "type": "string" },
+        "incidentDate": { "type": "string" },
+        "registeredAt": { "type": "string" },
+        "protectedNames": { "type": "array" }
+      },
+      "required": ["id", "caseNumber", "title", "policeStation", "status"]
+    },
+    "Document": {
+      "title": "Document",
+      "description": "Sealed digital evidence document record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "caseId": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string" },
+        "version": { "type": "number" },
+        "derivation": { "type": "string" },
+        "parentDocId": { "type": "string" },
+        "fileHash": { "type": "string" },
+        "merkleRoot": { "type": "string" },
+        "chunkHashes": { "type": "array" },
+        "chunkCount": { "type": "number" },
+        "size": { "type": "number" },
+        "mime": { "type": "string" },
+        "confidentiality": { "type": "string" },
+        "tags": { "type": "array" },
+        "aiSummary": { "type": "string" },
+        "protectedNames": { "type": "array" },
+        "encryption": { "type": "object" },
+        "storageRef": { "type": "string" },
+        "uploadedBy": { "type": "string" },
+        "uploaderRole": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "caseId", "name", "fileHash", "merkleRoot", "storageRef"]
+    },
+    "Blob": {
+      "title": "Blob",
+      "description": "Encrypted binary chunk stored in Firestore <=500KB",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "storageRef": { "type": "string" },
+        "partIndex": { "type": "number" },
+        "totalParts": { "type": "number" },
+        "size": { "type": "number" },
+        "data": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "storageRef", "partIndex", "data"]
+    },
+    "Setting": {
+      "title": "Setting",
+      "description": "System configuration and feature flags",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "chunkSizeMb": { "type": "number" },
+        "enableDemoPack": { "type": "boolean" },
+        "updatedAt": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Demo personas and registered officers"
+    },
+    "/cases/{caseId}": {
+      "schema": "Case",
+      "description": "Legal investigation cases"
+    },
+    "/documents/{documentId}": {
+      "schema": "Document",
+      "description": "Sealed evidence records"
+    },
+    "/blobs/{blobId}": {
+      "schema": "Blob",
+      "description": "Encrypted binary payload chunks"
+    },
+    "/settings/{settingId}": {
+      "schema": "Setting",
+      "description": "System settings"
+    }
+  }
+}

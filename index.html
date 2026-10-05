@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Suppress Vite HMR WebSocket connection errors in iFrame sandbox environment
+      window.addEventListener('unhandledrejection', function(event) {
+        if (event.reason && (String(event.reason).includes('WebSocket') || String(event.reason.message || '').includes('WebSocket'))) {
+          event.preventDefault();
+        }
+      });
+      window.addEventListener('error', function(event) {
+        if (event.message && (event.message.includes('WebSocket') || event.message.includes('failed to connect to websocket'))) {
+          event.preventDefault();
+        }
+      });
+    </script>
+    <title>SAKSHYA OS</title>
+    <meta name="description" content="Secure Digital Document Management System for Legal and Investigation Documents (Evidence that proves itself)." />
+    <meta property="og:title" content="SAKSHYA OS" />
+    <meta property="og:description" content="Secure Digital Document Management System for Legal and Investigation Documents (Evidence that proves itself)." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
